@@ -1,16 +1,103 @@
 ---
 import Base from "../layouts/Base.astro";
 ---
-<Base path="/pricing" title="Aidvue Pricing — Plans that convert into customers">
+<Base path="/pricing" title="Aidvue Pricing — Simple plans that turn calls into cash">
   <main class="wrap" style="padding:36px 0">
-    <h1>Pricing</h1>
-    <ul>
-      <li>Aidvue Reviews — $97/mo</li>
-      <li>Aidvue Calls — $297/mo</li>
-      <li>Aidvue Flow — $397/mo</li>
-      <li>Aidvue OS — $997/mo</li>
-    </ul>
-    <p><strong>5 in 30 Guarantee</strong>: If you don’t get 5 new customers in 30 days, we work free until you do.</p>
-    <a class="cta" href="/book">Book a Demo</a>
+    <h1 style="margin:0 0 6px">Pricing</h1>
+    <p style="color:#A6B6D9;margin:0 0 18px">⚡ Only <b>5 onboarding slots</b> left this month.</p>
+
+    <!-- Pricing Grid -->
+    <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px">
+      <div class="card" style="padding:18px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)">
+        <h3 style="margin:6px 0">Reviews</h3>
+        <p style="color:#A6B6D9;margin:6px 0 10px">Automated review requests + showcase.</p>
+        <div style="font-size:22px;font-weight:800;margin:4px 0">$97<span style="font-weight:600;font-size:14px">/mo</span></div>
+        <ul style="padding-left:18px;line-height:1.6;margin:10px 0">
+          <li>Text review invites</li><li>Google & Facebook sync</li><li>Review wall widget</li>
+        </ul>
+        <a class="cta" href="/book">Start with Reviews</a>
+      </div>
+
+      <div class="card" style="padding:18px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)">
+        <h3 style="margin:6px 0">Calls</h3>
+        <p style="color:#A6B6D9;margin:6px 0 10px">Missed-call capture + SMS follow-up.</p>
+        <div style="font-size:22px;font-weight:800;margin:4px 0">$297<span style="font-weight:600;font-size:14px">/mo</span></div>
+        <ul style="padding-left:18px;line-height:1.6;margin:10px 0">
+          <li>Instant text-back</li><li>After-hours auto-replies</li><li>Call summaries</li>
+        </ul>
+        <a class="cta" href="/book">Start with Calls</a>
+      </div>
+
+      <div class="card" style="padding:18px;border:2px solid rgba(87,225,255,.6);border-radius:14px;background:linear-gradient(180deg,rgba(87,225,255,.08),rgba(87,225,255,.03));box-shadow:0 10px 36px rgba(87,225,255,.12)">
+        <div class="badge" style="display:inline-block;padding:6px 10px;border-radius:999px;border:1px solid var(--line);color:#9FDFF0;background:rgba(87,225,255,.12);font-weight:600;font-size:.9rem">Most Popular</div>
+        <h3 style="margin:6px 0">Flow</h3>
+        <p style="color:#A6B6D9;margin:6px 0 10px">Automation to fill cancellations & slow days.</p>
+        <div style="font-size:22px;font-weight:800;margin:4px 0">$397<span style="font-weight:600;font-size:14px">/mo</span></div>
+        <ul style="padding-left:18px;line-height:1.6;margin:10px 0">
+          <li>Reactivate warm leads</li><li>Smart scheduling nudges</li><li>Campaign templates</li>
+        </ul>
+        <a class="cta" href="/book">Get Flow</a>
+      </div>
+
+      <div class="card" style="padding:18px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03)">
+        <h3 style="margin:6px 0">Aidvue OS</h3>
+        <p style="color:#A6B6D9;margin:6px 0 10px">Everything + priority support.</p>
+        <div style="font-size:22px;font-weight:800;margin:4px 0">$997<span style="font-weight:600;font-size:14px">/mo</span></div>
+        <ul style="padding-left:18px;line-height:1.6;margin:10px 0">
+          <li>All features included</li><li>1:1 onboarding</li><li>Quarterly growth plan</li>
+        </ul>
+        <a class="cta" href="/book">Run the OS</a>
+      </div>
+    </div>
+
+    <!-- Guarantee Banner -->
+    <div style="margin:16px 0" class="banner"><b>5‑in‑30 Guarantee:</b> If you don’t land 5 new customers in 30 days, we work free until you do.</div>
+
+    <!-- FAQ Accordion -->
+    <section style="margin-top:18px" class="section">
+      <div style="padding:18px;border-radius:16px">
+        <h2 style="margin:0 0 12px">FAQ</h2>
+        <details style="border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:10px">
+          <summary><b>Is there a contract?</b></summary>
+          <p style="color:#A6B6D9">Month-to-month. Cancel anytime.</p>
+        </details>
+        <details style="border:1px solid var(--line);border-radius:10px;padding:10px;margin-bottom:10px">
+          <summary><b>What happens if I don’t get 5 customers?</b></summary>
+          <p style="color:#A6B6D9">We work for free until you do—no fine print.</p>
+        </details>
+        <details style="border:1px solid var(--line);border-radius:10px;padding:10px">
+          <summary><b>Can you work with my industry?</b></summary>
+          <p style="color:#A6B6D9">Yes—plumbing, HVAC, dental, home services, auto, and more.</p>
+        </details>
+      </div>
+    </section>
   </main>
+
+  <!-- Exit Intent Modal -->
+  <div id="exitModal" style="position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;z-index:70">
+    <div style="background:#0F1D3A;border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:18px;max-width:520px">
+      <h3 style="margin-top:0">Not ready yet?</h3>
+      <p style="color:#A6B6D9">Grab the free 5‑in‑30 Playbook and see exactly how we deliver results.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a class="cta" href="/resources/5-in-30-playbook" id="exitGrab">Get the Playbook</a>
+        <button class="cta" id="exitClose">No thanks</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      let shown=sessionStorage.getItem('aidvue_exit_shown');
+      const modal=document.getElementById('exitModal');
+      const closeBtn=document.getElementById('exitClose');
+      const grab=document.getElementById('exitGrab');
+      function show(){ if(shown) return; modal.style.display='flex'; sessionStorage.setItem('aidvue_exit_shown','1'); }
+      // desktop exit intent
+      document.addEventListener('mouseout', e=>{ if(e.clientY<10) show(); });
+      // mobile idle intent (~12s inactivity)
+      let t; ['touchstart','scroll','keydown','mousemove'].forEach(evt=>document.addEventListener(evt, ()=>{ clearTimeout(t); t=setTimeout(show,12000); }));
+      closeBtn && closeBtn.addEventListener('click', ()=> modal.style.display='none');
+      grab && grab.addEventListener('click', ()=> { try{ if(window.aidvueTrack) aidvueTrack('exit_playbook_click'); }catch(e){} });
+    })();
+  </script>
 </Base>

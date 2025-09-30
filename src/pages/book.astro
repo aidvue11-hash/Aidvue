@@ -3,8 +3,46 @@ import Base from "../layouts/Base.astro";
 ---
 <Base path="/book" title="Book Your Aidvue Demo">
   <main class="wrap" style="padding:36px 0">
-    <h1>Book Your Aidvue Demo</h1>
-    <div class="calendly-inline-widget" data-url="https://calendly.com/aidvue11/30min?primary_color=57e1ff" style="min-width:320px;height:700px"></div>
-    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+    <h1 style="margin:0 0 6px">Book Your Aidvue Demo</h1>
+    <p style="color:#A6B6D9;max-width:900px">In 15 minutes we’ll map your 5‑in‑30 plan: where calls leak, how to recover them, and which plan fits your numbers.</p>
+
+    <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;align-items:start">
+      <!-- Calendly -->
+      <div class="section" style="padding:18px;border-radius:14px">
+        <div id="cal-wrapper" style="width:100%;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.3);min-height:120px;display:flex;align-items:center;justify-content:center">
+          <button id="load-cal" class="cta" style="margin:18px">Load booking calendar</button>
+        </div>
+      </div>
+
+      <!-- Trust / Steps -->
+      <aside class="section" style="padding:18px;border-radius:14px">
+        <h3 style="margin:0 0 10px">What happens on the call</h3>
+        <ol style="margin:0 0 12px;line-height:1.6">
+          <li>We review your missed-call + slot gaps</li>
+          <li>We estimate **recovered revenue** from your numbers</li>
+          <li>If it’s a fit, we launch your 5‑in‑30 plan</li>
+        </ol>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <img src="/assets/logo-google.svg" alt="Google" width="90" height="30"/>
+          <img src="/assets/logo-facebook.svg" alt="Facebook" width="90" height="30"/>
+          <img src="/assets/logo-yelp.svg" alt="Yelp" width="90" height="30"/>
+        </div>
+      </aside>
+    </div>
   </main>
+
+  <script>
+    const btn=document.getElementById('load-cal'); const wrap=document.getElementById('cal-wrapper');
+    function loadCalendly(){
+      let qp='primary_color=57e1ff';
+      try{ const utm=JSON.parse(localStorage.getItem('aidvue_utm')||'{}'); const parts=[]; for(const k in utm){ parts.push(encodeURIComponent(k)+'='+encodeURIComponent(utm[k])); } if(parts.length) qp+='&'+parts.join('&'); }catch(e){}
+      const url='https://calendly.com/aidvue11/30min?'+qp;
+      wrap.innerHTML='<div class="calendly-inline-widget" data-url="'+url+'" style="min-width:320px;height:700px"></div>';
+      const s=document.createElement('script'); s.async=true; s.src='https://assets.calendly.com/assets/external/widget.js'; document.body.appendChild(s);
+      if(window.aidvueTrack) aidvueTrack('calendly_loaded');
+    }
+    btn.addEventListener('click', loadCalendly, { once:true });
+    const io=new IntersectionObserver((entries)=>{ entries.forEach(e=>{ if(e.isIntersecting){ loadCalendly(); io.disconnect(); }}); }, { rootMargin:'0px 0px -50% 0px' });
+    io.observe(wrap);
+  </script>
 </Base>
