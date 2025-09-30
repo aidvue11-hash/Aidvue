@@ -1,0 +1,26 @@
+---
+import Base from "../layouts/Base.astro";
+---
+<Base path="/roi" title="Aidvue ROI Calculator">
+  <main class="wrap" style="padding:36px 0">
+    <h1>ROI Calculator</h1>
+    <p>Estimate monthly revenue lost and what Aidvue could recover.</p>
+    <label>Average Job Value ($): <input id="job" type="number" value="250"></label><br/>
+    <label>Missed Calls per Week: <input id="missed" type="number" value="5"></label><br/>
+    <label>Close Rate (%): <input id="close" type="number" value="60"></label><br/>
+    <button onclick="calc()">Calculate ROI</button>
+    <div id="out"></div>
+    <script>
+      function usd(n){return n.toLocaleString(undefined,{style:'currency',currency:'USD'});}
+      function calc(){
+        var job=parseFloat(document.getElementById('job').value||0);
+        var missed=parseFloat(document.getElementById('missed').value||0);
+        var close=parseFloat(document.getElementById('close').value||0)/100;
+        var missedMonthly=missed*4.3, bookedLost=missedMonthly*close;
+        var revenueLost=bookedLost*job, recovered=revenueLost*0.6;
+        var plan=recovered>1000?"Aidvue OS ($997/mo)":(recovered>300?"Aidvue Calls ($297/mo)":"Aidvue Reviews ($97/mo)");
+        document.getElementById('out').innerHTML="<p><b>Revenue Lost:</b> "+usd(revenueLost)+"</p><p><b>Aidvue Recovery:</b> "+usd(recovered)+"</p><p><b>Recommended Plan:</b> "+plan+"</p>";
+      }
+    </script>
+  </main>
+</Base>
