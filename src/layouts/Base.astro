@@ -1,0 +1,43 @@
+---
+const {
+  title = "Aidvue — Helping local businesses get seen, get booked, get paid.",
+  description = "Aidvue is the AI operating system for local businesses.",
+  path = "/",
+} = Astro.props;
+const siteUrl = "https://aidvue.com";
+const ogImage = `${Astro.site || siteUrl}/assets/og-default.png`;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta name="theme-color" content="#0E1A33" />
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"/>
+  <link rel="manifest" href="/site.webmanifest">
+  <style>
+    :root{--bg:#0E1A33;--bg2:#142B5E;--ink:#EAF2FF;--muted:#A6B6D9;--cyan:#57E1FF;--line:rgba(255,255,255,.12)}
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--ink);font-family:system-ui,-apple-system,Inter,Segoe UI,Roboto,Arial,sans-serif}
+    .wrap{max-width:1200px;margin:0 auto;padding:24px 20px}
+    header{position:sticky;top:0;background:rgba(14,26,51,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    nav a{margin-right:12px;color:var(--cyan);text-decoration:none}
+    .cta{display:inline-block;padding:10px 14px;border:1px solid var(--line);border-radius:10px;color:var(--ink);text-decoration:none}
+    footer{border-top:1px solid var(--line);padding:20px;color:#A6B6D9}
+  </style>
+</head>
+<body>
+  <header><div class="wrap"><nav>
+    <a href="/">Home</a>
+    <a href="/pricing">Pricing</a>
+    <a href="/book">Book</a>
+    <a href="/roi">ROI</a>
+    <a href="/resources/5-in-30-playbook">Resources</a>
+    <a href="/solutions/plumber">Solutions</a>
+  </nav></div></header>
+  <main id="main"><slot /></main>
+  <footer><div class="wrap">© {new Date().getFullYear()} Aidvue</div></footer>
+</body>
+</html>
