@@ -1,11 +1,5 @@
 ---
-const {
-  title = "Aidvue — Helping local businesses get seen, get booked, get paid.",
-  description = "Aidvue is the AI operating system for local businesses.",
-  path = "/",
-} = Astro.props;
-const siteUrl = "https://aidvue.com";
-const ogImage = `${Astro.site || siteUrl}/assets/og-default.png`;
+const { title="Aidvue — Get seen, get booked, get paid.", description="Aidvue is the AI operating system for local businesses.", path="/" } = Astro.props;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -20,24 +14,53 @@ const ogImage = `${Astro.site || siteUrl}/assets/og-default.png`;
   <style>
     :root{--bg:#0E1A33;--bg2:#142B5E;--ink:#EAF2FF;--muted:#A6B6D9;--cyan:#57E1FF;--line:rgba(255,255,255,.12)}
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--ink);font-family:system-ui,-apple-system,Inter,Segoe UI,Roboto,Arial,sans-serif}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,var(--bg),var(--bg2));color:var(--ink);font-family:system-ui,Inter,Segoe UI,Roboto,Arial,sans-serif}
     .wrap{max-width:1200px;margin:0 auto;padding:24px 20px}
-    header{position:sticky;top:0;background:rgba(14,26,51,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+    header.site{position:sticky;top:0;background:rgba(14,26,51,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);z-index:40}
     nav a{margin-right:12px;color:var(--cyan);text-decoration:none}
-    .cta{display:inline-block;padding:10px 14px;border:1px solid var(--line);border-radius:10px;color:var(--ink);text-decoration:none}
-    footer{border-top:1px solid var(--line);padding:20px;color:#A6B6D9}
+    .cta{display:inline-flex;gap:8px;align-items:center;padding:10px 14px;border:1px solid var(--line);border-radius:10px;color:var(--ink);text-decoration:none}
+    footer.site{border-top:1px solid var(--line);padding:20px;color:#A6B6D9;margin-top:40px}
+    .sticky-cta{position:fixed;left:12px;right:12px;bottom:12px;display:none;justify-content:space-between;align-items:center;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(87,225,255,.15);z-index:50}
+    @media(max-width:820px){.sticky-cta{display:flex}}
   </style>
 </head>
 <body>
-  <header><div class="wrap"><nav>
+  <header class="site"><div class="wrap"><nav>
     <a href="/">Home</a>
     <a href="/pricing">Pricing</a>
     <a href="/book">Book</a>
     <a href="/roi">ROI</a>
     <a href="/resources/5-in-30-playbook">Resources</a>
     <a href="/solutions/plumber">Solutions</a>
+    <a href="/book" class="cta" style="float:right">Book Demo</a>
   </nav></div></header>
+
   <main id="main"><slot /></main>
-  <footer><div class="wrap">© {new Date().getFullYear()} Aidvue</div></footer>
+
+  <footer class="site"><div class="wrap">© {new Date().getFullYear()} Aidvue • <a href="/privacy">Privacy</a> • <a href="/terms">Terms</a></div></footer>
+
+  <div class="sticky-cta">
+    <span>See Aidvue in action</span>
+    <a href="/book" class="cta">Book Demo</a>
+  </div>
+
+  <script>
+    // Capture UTM parameters
+    (function(){
+      const p=new URLSearchParams(location.search); const u={};
+      ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','utm_industry'].forEach(k=>{
+        const v=p.get(k); if(v) u[k]=v;
+      });
+      if(document.referrer) u.referrer=document.referrer;
+      if(Object.keys(u).length){ localStorage.setItem('aidvue_utm', JSON.stringify(u)); }
+    })();
+    // Analytics shim
+    window.aidvueTrack=(name,props={})=>{
+      try{
+        if(window.plausible) plausible(name,{props});
+        if(window.gtag) gtag('event',name,props);
+      }catch(e){}
+    }
+  </script>
 </body>
 </html>
