@@ -4,14 +4,43 @@ import Base from "../../layouts/Base.astro";
 <Base path="/resources/5-in-30-playbook" title="Aidvue 5‑in‑30 Playbook — Free Resource">
   <main class="wrap" style="padding:36px 0">
     <h1>Free: The 5‑in‑30 Playbook</h1>
-    <form name="playbook" method="POST" data-netlify="true" action="/thank-you">
+    <p style="color:#A6B6D9;max-width:860px">A practical guide showing how local businesses can secure 5 new paying customers in their first 30 days with Aidvue.</p>
+    <form name="playbook" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you" style="background:rgba(255,255,255,.04);border:1px solid var(--line);border-radius:12px;padding:16px;max-width:720px">
       <input type="hidden" name="form-name" value="playbook" />
-      <label>First Name: <input name="first" required></label><br/>
-      <label>Last Name: <input name="last" required></label><br/>
-      <label>Email: <input type="email" name="email" required></label><br/>
-      <label><input type="checkbox" required> I agree to the privacy policy</label><br/>
-      <button type="submit">Get the Playbook</button>
-      <a href="/assets/aidvue-5-in-30-playbook.pdf" target="_blank">Open PDF</a>
+      <p class="visually-hidden"><label>Don’t fill this out: <input name="bot-field" /></label></p>
+
+      <label>First Name<input name="first" required style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--line)"/></label>
+      <label>Last Name<input name="last" required style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--line)"/></label>
+      <label>Email<input type="email" name="email" required style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--line)"/></label>
+      <label>Business<input name="business" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--line)"/></label>
+
+      <!-- Hidden UTM + referrer fields -->
+      <input type="hidden" name="utm_source">
+      <input type="hidden" name="utm_medium">
+      <input type="hidden" name="utm_campaign">
+      <input type="hidden" name="utm_term">
+      <input type="hidden" name="utm_content">
+      <input type="hidden" name="utm_industry">
+      <input type="hidden" name="referrer">
+
+      <label style="display:flex;gap:8px;align-items:center;margin-top:8px"><input type="checkbox" required/> I agree to the <a href="/privacy" style="margin-left:4px">privacy policy</a>.</label>
+      <div style="margin-top:12px;display:flex;gap:10px">
+        <button type="submit" class="cta" onclick="aidvueTrack && aidvueTrack('lead_submit',{form:'playbook'})">Get the Playbook</button>
+        <a class="cta" href="/assets/aidvue-5-in-30-playbook.pdf" target="_blank" rel="noopener">Open PDF</a>
+      </div>
     </form>
   </main>
+
+  <script>
+    (function(){
+      try{
+        const utm = JSON.parse(localStorage.getItem('aidvue_utm')||'{}');
+        const keys = ['utm_source','utm_medium','utm_campaign','utm_term','utm_content','utm_industry','referrer'];
+        keys.forEach(k=>{
+          const el = document.querySelector('input[name="'+k+'"]');
+          if(el && utm[k]) el.value = utm[k];
+        });
+      }catch(e){}
+    })();
+  </script>
 </Base>
