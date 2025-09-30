@@ -1,0 +1,17 @@
+---
+import Base from "../../layouts/Base.astro";
+---
+<Base path="/resources/5-in-30-playbook" title="Aidvue 5‑in‑30 Playbook — Free Resource">
+  <main class="wrap" style="padding:36px 0">
+    <h1>Free: The 5‑in‑30 Playbook</h1>
+    <form name="playbook" method="POST" data-netlify="true" action="/thank-you">
+      <input type="hidden" name="form-name" value="playbook" />
+      <label>First Name: <input name="first" required></label><br/>
+      <label>Last Name: <input name="last" required></label><br/>
+      <label>Email: <input type="email" name="email" required></label><br/>
+      <label><input type="checkbox" required> I agree to the privacy policy</label><br/>
+      <button type="submit">Get the Playbook</button>
+      <a href="/assets/aidvue-5-in-30-playbook.pdf" target="_blank">Open PDF</a>
+    </form>
+  </main>
+</Base>
